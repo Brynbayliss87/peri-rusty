@@ -20,7 +20,46 @@ fn main() {
        })
        .and_then(|e| e.click())
        .and_then(|mut c| {
-           c.find(Locator::Css("#InputStoreID"))
+            c.find(Locator::Css("#InputHour"))
+       })
+       .and_then(|e| {
+           e.select_by_value("01")
+       })
+       .and_then(|mut c| {
+            c.find(Locator::Css("#InputMinute"))
+       })
+       .and_then(|e| {
+           e.select_by_value("01")
+       })
+       .and_then(|mut c| {
+            c.find(Locator::Css("#InputMeridian"))
+       })
+       .and_then(|e| {
+           e.select_by_value("AM")
+       })
+       .and_then(|mut c| {
+           c.form(Locator::Css("#surveyEntryForm"))
+       })
+       .and_then(|mut f| {
+            f.set_by_name("InputStoreID", "48")
+       })
+       .and_then(|mut f| {
+            f.set_by_name("Index_VisitDateDatePicker", "14/08/2019")
+       })
+       .and_then(|mut f| {
+            f.set_by_name("CN1", "48")
+       })
+        .and_then(|mut f| {
+            f.set_by_name("CN2", "48")
+       })
+       .and_then(|f| {
+            f.submit()
+       })
+       .and_then(|mut c| {
+            c.find(Locator::Css("#R000004.1"))
+       })
+       .and_then(|e| {
+           e.select_by_value("01")
        })
        .map(|_| ())
        .map_err(|error| panic!("a WebDriver command failed: {:?}", error));
